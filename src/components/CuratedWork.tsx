@@ -1,298 +1,323 @@
 "use client";
 
-import { useRef, useState, useEffect } from "react";
-import { motion, useInView, useMotionValue, useSpring } from "framer-motion";
+import { useRef } from "react";
+import { motion, useScroll, useTransform, useInView } from "framer-motion";
 import Image from "next/image";
-import { ArrowUpRight, Plus, Eye } from "lucide-react";
+import Link from "next/link";
+import { ArrowRight, Star } from "lucide-react";
 
-// Project Data with specific tech stack details
-const projects = [
+// --- Types ---
+interface TechBadge {
+  label: string;
+  icon?: React.ElementType;
+  href?: string;
+}
+
+interface Project {
+  id: string;
+  title: string;
+  label: string;
+  description: string;
+  features: string[];
+  techStack: TechBadge[];
+  image: string;
+  link: string;
+  github?: string;
+}
+
+// --- Data ---
+const projects: Project[] = [
   {
-    id: 1,
+    id: "syndicator",
     title: "Syndicator",
+    label: "Full Stack Platform",
     description:
-      "Built a scalable full-stack platform integrating a Python-based backend (Django) and a modern React + TypeScript + Vite frontend for seamless and high-performance user experience.",
+      "A scalable full-stack platform integrating a Python-based backend (Django) and a modern React + TypeScript + Vite frontend. Designed for seamless data exchange and high-performance user experience.",
     features: [
-      "Implemented RESTful APIs enabling efficient data exchange.",
-      "Designed a responsive, type-safe UI with advanced linting.",
-      "Optimized module bundling using Vite and ESLint configurations.",
+      "RESTful APIs for efficient data exchange",
+      "Responsive, type-safe UI with advanced linting",
+      "Optimized module bundling with Vite",
     ],
     techStack: [
-      { name: "Python", icon: "/icons/python.svg" },
-      { name: "Django", icon: "/icons/django.svg" },
-      { name: "React", icon: "/icons/react.svg" },
-      { name: "TypeScript", icon: "/icons/typescript.svg" },
-      { name: "Vite", icon: "/icons/vite.svg" },
+      { label: "React" },
+      { label: "TypeScript" },
+      { label: "Django" },
+      { label: "Python" },
+      { label: "Vite" },
     ],
-    img1: "/Images/Syndicator/Login.png",
-    img2: "/Images/Syndicator/Dashboard.png",
-    color: "#EC4899", // Pink-500 to match reference
+    image: "/Images/Syndicator/Dashboard.png", // Using existing path
+    link: "#",
   },
   {
-    id: 2,
+    id: "himalaya",
     title: "Himalaya Travel",
+    label: "Immersive Experience",
     description:
       "An immersive travel guide for the Himalayas, showcasing breathtaking visuals and interactive maps to help travelers plan their perfect adventure.",
     features: [
-      "Interactive 3D maps with Three.js.",
-      "Smooth scroll animations using GSAP.",
-      "Responsive design for all devices.",
+      "Interactive 3D maps with Three.js",
+      "Smooth scroll animations using GSAP",
+      "Responsive design for all devices",
     ],
     techStack: [
-      { name: "React", icon: "/icons/react.svg" },
-      { name: "Three.js", icon: "/icons/threejs.svg" },
-      { name: "Framer", icon: "/icons/framer.svg" },
-      { name: "GSAP", icon: "/icons/gsap.svg" },
+      { label: "React" },
+      { label: "Three.js" },
+      { label: "Framer Motion" },
+      { label: "GSAP" },
     ],
-    img1: "/Images/Himalaya.png",
-    img2: "/Images/Himalaya.png", // Fallback for now
-    color: "#4ECDC4",
+    image: "/Images/Himalaya.png",
+    link: "#",
   },
   {
-    id: 3,
+    id: "analytics",
     title: "Global Analytics",
+    label: "Data Visualization",
     description:
       "Real-time data visualization platform for tracking global trends and metrics. Provides actionable insights through intuitive dashboards.",
     features: [
-      "Data visualization with D3.js.",
-      "Type-safe backend with Prisma.",
-      "High-performance rendering.",
+      "Data visualization with D3.js",
+      "Type-safe backend with Prisma",
+      "High-performance rendering",
     ],
     techStack: [
-      { name: "Next.js", icon: "/icons/nextjs.svg" },
-      { name: "TypeScript", icon: "/icons/typescript.svg" },
-      { name: "D3.js", icon: "/icons/d3.svg" },
-      { name: "Prisma", icon: "/icons/prisma.svg" },
+      { label: "Next.js" },
+      { label: "TypeScript" },
+      { label: "D3.js" },
+      { label: "Prisma" },
     ],
-    img1: "/Images/Map.png",
-    img2: "/Images/Map.png", // Fallback for now
-    color: "#FFE66D",
+    image: "/Images/Map.png",
+    link: "#",
   },
 ];
 
-export default function CuratedWork() {
-  const [activeProject, setActiveProject] = useState(0);
+// --- Components ---
+
+/**
+ * Reusable Badge Component
+ * Pill badges with a subtle dark background, border, and inner shadow.
+ */
+const Badge = ({ label, icon: Icon, href }: TechBadge) => {
+  const content = (
+    <span className="flex items-center gap-1.5 px-3 py-1.5 text-xs font-medium tracking-wide text-white/80 bg-white/5 border border-white/10 rounded-full shadow-[inset_0_1px_0_0_rgba(255,255,255,0.05)] transition-all duration-300 hover:bg-white/10 hover:text-white hover:border-white/20 focus:outline-none focus:ring-2 focus:ring-pink-500/50">
+      {Icon && <Icon size={12} />}
+      {label}
+    </span>
+  );
+
+  if (href) {
+    return (
+      <a
+        href={href}
+        target="_blank"
+        rel="noopener noreferrer"
+        className="inline-block focus:outline-none rounded-full"
+      >
+        {content}
+      </a>
+    );
+  }
 
   return (
-    <section className="relative bg-black py-24">
-      <div className="max-w-7xl mx-auto px-6 md:px-12">
-        {/* Section Header */}
-        <div className="text-center mb-32">
-          <span className="text-xs font-bold tracking-[0.2em] text-white/40 uppercase mb-4 block">
-            Featured Case Studies
-          </span>
-          <h2 className="text-5xl md:text-7xl font-serif text-white">
-            Curated <span className="italic text-pink-500">work</span>
-          </h2>
-        </div>
+    <div className="inline-block" tabIndex={0}>
+      {content}
+    </div>
+  );
+};
 
-        <div className="flex flex-col lg:flex-row gap-8 lg:gap-12">
-          {/* Left Column: Scrolling Images */}
-          <div className="w-full lg:w-3/5 flex flex-col gap-[15vh]">
-            {projects.map((project, index) => (
-              <ProjectImage
-                key={project.id}
-                project={project}
-                index={index}
-                setActiveProject={setActiveProject}
-              />
-            ))}
+/**
+ * Project Card Component (Left Column)
+ */
+const ProjectCard = ({
+  project,
+  index,
+}: {
+  project: Project;
+  index: number;
+}) => {
+  const ref = useRef<HTMLDivElement>(null);
+  const { scrollYProgress } = useScroll({
+    target: ref,
+    offset: ["start end", "end start"],
+  });
+
+  // Parallax effect: Card translates vertically slower than scroll
+  const y = useTransform(scrollYProgress, [0, 1], [0, -50]);
+  const scale = useTransform(scrollYProgress, [0, 0.2], [0.98, 1]);
+  const opacity = useTransform(scrollYProgress, [0, 0.2], [0, 1]);
+
+  return (
+    <motion.div
+      ref={ref}
+      style={{ y, scale, opacity }}
+      className="relative w-full aspect-[4/3] group rounded-3xl p-1"
+    >
+      <Link
+        href={project.link}
+        className="block w-full h-full focus:outline-none focus:ring-4 focus:ring-pink-500/50 rounded-3xl"
+      >
+        {/* Animated Gradient Background */}
+        <div className="absolute inset-0 rounded-3xl bg-gradient-to-b from-pink-500 via-fuchsia-500 to-purple-500 opacity-80 blur-sm transition-all duration-500 group-hover:opacity-100 group-hover:blur-md animate-gradient" />
+
+        {/* Card Container */}
+        <div className="relative h-full w-full rounded-[22px] bg-black/90 overflow-hidden border border-white/10 shadow-2xl transition-transform duration-500 group-hover:scale-[1.02]">
+          {/* Inner Glow */}
+          <div className="absolute inset-0 pointer-events-none shadow-[inset_0_0_40px_rgba(236,72,153,0.1)] rounded-[22px]" />
+
+          {/* Mockup Image */}
+          <div className="absolute inset-4 md:inset-8 rounded-xl overflow-hidden shadow-[inset_0_0_20px_rgba(0,0,0,0.5)] bg-[#1a1a1a]">
+            <Image
+              src={project.image}
+              alt={`${project.title} Mockup`}
+              fill
+              className="object-cover object-top transition-transform duration-700 group-hover:scale-105"
+              sizes="(max-width: 768px) 100vw, 60vw"
+              priority={index === 0}
+            />
           </div>
 
-          {/* Right Column: Sticky Text */}
-          <div className="hidden lg:flex w-2/5 h-screen sticky top-0 flex-col justify-center">
-            <div className="relative h-[60vh] w-full">
-              {projects.map((project, index) => (
-                <motion.div
-                  key={project.id}
-                  initial={{ opacity: 0, x: 20 }}
-                  animate={{
-                    opacity: activeProject === index ? 1 : 0,
-                    x: activeProject === index ? 0 : 20,
-                    pointerEvents: activeProject === index ? "auto" : "none",
-                  }}
-                  transition={{ duration: 0.5 }}
-                  className="absolute inset-0 flex flex-col justify-center p-8 md:p-10 border border-white/10 bg-white/5 rounded-3xl backdrop-blur-sm"
-                >
-                  <div className="flex items-center gap-4 mb-6">
-                    <div className="h-[2px] w-10 bg-pink-500" />
-                    <h3 className="text-4xl font-serif font-bold text-white">
-                      {project.title}
-                    </h3>
-                  </div>
-
-                  <p className="text-base md:text-lg text-white/70 leading-relaxed mb-6 font-light font-sans">
-                    {project.description}
-                  </p>
-
-                  {/* Features List */}
-                  <div className="space-y-2 mb-8">
-                    {project.features.map((feature, i) => (
-                      <div key={i} className="flex items-start gap-3">
-                        <Plus
-                          size={16}
-                          className="text-pink-500 mt-1 shrink-0"
-                        />
-                        <span className="text-white/60 text-sm font-sans">
-                          {feature}
-                        </span>
-                      </div>
-                    ))}
-                  </div>
-
-                  {/* Tech Stack Badges */}
-                  <div className="flex flex-wrap gap-2 mb-8">
-                    {project.techStack.map((tech) => (
-                      <div
-                        key={tech.name}
-                        className="flex items-center gap-2 px-3 py-1.5 rounded-lg border border-white/10 bg-white/5 hover:bg-white/10 transition-colors"
-                      >
-                        {/* Placeholder for Icon - In real app, use Image or SVG */}
-                        <div className="w-4 h-4 rounded-full bg-white/20" />
-                        <span className="text-xs font-medium text-white/80 font-mono">
-                          {tech.name}
-                        </span>
-                      </div>
-                    ))}
-                  </div>
-
-                  <button className="flex items-center gap-2 text-white font-medium hover:gap-3 transition-all group w-fit text-sm tracking-wide uppercase border-b border-white/20 pb-1 hover:border-white font-sans">
-                    View Case Study
-                    <ArrowUpRight size={16} className="text-pink-500" />
-                  </button>
-                </motion.div>
-              ))}
+          {/* Hover CTA */}
+          <div className="absolute top-6 right-6 opacity-0 transform translate-x-2 translate-y-2 transition-all duration-300 group-hover:opacity-100 group-hover:translate-x-0 group-hover:translate-y-0">
+            <div className="p-3 bg-white text-black rounded-full shadow-lg">
+              <ArrowRight size={20} />
             </div>
           </div>
         </div>
-      </div>
-    </section>
+      </Link>
+    </motion.div>
   );
-}
+};
 
-function ProjectImage({
-  project,
-  index,
-  setActiveProject,
-}: {
-  project: any;
-  index: number;
-  setActiveProject: (index: number) => void;
-}) {
-  const ref = useRef<HTMLDivElement>(null);
-  // Trigger when 95% of the image is visible in the viewport
-  const isInView = useInView(ref, { amount: 0.95 });
-  const [isHovered, setIsHovered] = useState(false);
+/**
+ * Project Details Component (Right Column)
+ */
+const ProjectDetails = ({ project }: { project: Project }) => {
+  const ref = useRef(null);
+  const isInView = useInView(ref, { once: true, margin: "-100px" });
 
-  // Mouse tracking for custom cursor
-  const mouseX = useMotionValue(0);
-  const mouseY = useMotionValue(0);
+  const containerVariants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.1,
+        delayChildren: 0.2,
+      },
+    },
+  };
 
-  const springConfig = { damping: 20, stiffness: 300 };
-  const cursorX = useSpring(mouseX, springConfig);
-  const cursorY = useSpring(mouseY, springConfig);
-
-  useEffect(() => {
-    if (isInView) {
-      setActiveProject(index);
-    }
-  }, [isInView, setActiveProject, index]);
-
-  const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
-    const rect = e.currentTarget.getBoundingClientRect();
-    mouseX.set(e.clientX - rect.left);
-    mouseY.set(e.clientY - rect.top);
+  const itemVariants = {
+    hidden: { opacity: 0, y: 20 },
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: {
+        duration: 0.6,
+        ease: [0.22, 1, 0.36, 1] as const,
+      },
+    },
   };
 
   return (
-    <div
+    <motion.div
       ref={ref}
-      className="w-full aspect-[4/3] rounded-3xl overflow-hidden relative group border border-white/10 bg-[#111] cursor-none"
-      onMouseEnter={() => setIsHovered(true)}
-      onMouseLeave={() => setIsHovered(false)}
-      onMouseMove={handleMouseMove}
+      variants={containerVariants}
+      initial="hidden"
+      animate={isInView ? "visible" : "hidden"}
+      className="flex flex-col justify-center h-full py-8 md:py-0"
     >
-      {/* Background Color/Gradient */}
-      <div
-        className="absolute inset-0 transition-opacity duration-500 z-0"
-        style={{
-          background: project.color, // Use solid color as base
-          opacity: 0.9, // High opacity for vibrant look
-        }}
+      {/* Label */}
+      <motion.span
+        variants={itemVariants}
+        className="text-xs font-bold tracking-[0.2em] text-white/40 uppercase mb-4"
       >
-        {/* Add a subtle gradient overlay for depth */}
-        <div className="absolute inset-0 bg-gradient-to-br from-white/10 to-black/20" />
-      </div>
+        {project.label}
+      </motion.span>
 
-      {/* Images Container - Reduced inner border (inset-3 instead of inset-4) */}
-      <div className="absolute inset-3 md:inset-4 rounded-xl overflow-hidden shadow-2xl transition-transform duration-700 group-hover:scale-[1.02] z-10 bg-black">
-        {/* Primary Image (Login) */}
-        <div
-          className={`absolute inset-0 transition-opacity duration-500 ${
-            isHovered ? "opacity-0" : "opacity-100"
-          }`}
-        >
-          <Image
-            src={project.img1}
-            alt={`${project.title} - Main`}
-            fill
-            className="object-cover"
-          />
-        </div>
-
-        {/* Secondary Image (Dashboard) - Visible on Hover */}
-        <div
-          className={`absolute inset-0 transition-opacity duration-500 ${
-            isHovered ? "opacity-100" : "opacity-0"
-          }`}
-        >
-          <Image
-            src={project.img2}
-            alt={`${project.title} - Detail`}
-            fill
-            className="object-cover"
-          />
-        </div>
-      </div>
-
-      {/* Custom Cursor / Hover Overlay */}
-      <motion.div
-        className="absolute z-20 pointer-events-none flex items-center justify-center"
-        initial={{ opacity: 0, scale: 0.5 }}
-        animate={{
-          opacity: isHovered ? 1 : 0,
-          scale: isHovered ? 1 : 0.5,
-        }}
-        style={{
-          x: cursorX,
-          y: cursorY,
-          translateX: "-50%",
-          translateY: "-50%",
-          top: 0,
-          left: 0,
-          position: "absolute",
-        }}
+      {/* Title */}
+      <motion.h3
+        variants={itemVariants}
+        className="text-4xl md:text-5xl font-serif font-bold text-white mb-6"
       >
-        <div className="relative w-24 h-24 md:w-32 md:h-32 flex items-center justify-center bg-black/80 backdrop-blur-sm rounded-full border border-white/20 shadow-2xl">
-          {/* Rotating Text */}
-          <div className="absolute inset-0 animate-[spin_10s_linear_infinite]">
-            <svg viewBox="0 0 100 100" width="100%" height="100%">
-              <path
-                id="circlePath"
-                d="M 50, 50 m -37, 0 a 37,37 0 1,1 74,0 a 37,37 0 1,1 -74,0"
-                fill="transparent"
-              />
-              <text className="text-[11px] font-bold uppercase tracking-widest fill-white">
-                <textPath href="#circlePath" startOffset="0%">
-                  View Details • View Details • View Details •
-                </textPath>
-              </text>
-            </svg>
-          </div>
-          {/* Eye Icon */}
-          <Eye className="w-8 h-8 text-white" />
-        </div>
+        {project.title}
+      </motion.h3>
+
+      {/* Description */}
+      <motion.p
+        variants={itemVariants}
+        className="text-base md:text-lg text-white/70 leading-relaxed mb-8 font-light"
+      >
+        {project.description}
+      </motion.p>
+
+      {/* Features */}
+      <motion.ul variants={itemVariants} className="space-y-4 mb-10">
+        {project.features.map((feature, i) => (
+          <li key={i} className="flex items-start gap-3">
+            <Star className="w-5 h-5 text-pink-500 shrink-0 mt-0.5 fill-pink-500/20" />
+            <span className="text-white/80 text-sm md:text-base leading-relaxed">
+              {feature}
+            </span>
+          </li>
+        ))}
+      </motion.ul>
+
+      {/* Tech Stack */}
+      <motion.div variants={itemVariants} className="flex flex-wrap gap-3">
+        {project.techStack.map((tech, i) => (
+          <Badge key={i} {...tech} />
+        ))}
       </motion.div>
-    </div>
+    </motion.div>
+  );
+};
+
+export default function CuratedWork() {
+  return (
+    <section className="relative bg-black py-24 md:py-32 overflow-hidden">
+      <div className="max-w-7xl mx-auto px-6 md:px-12">
+        {/* Section Header */}
+        <div className="text-center mb-24 md:mb-32">
+          <motion.span
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="text-xs font-bold tracking-[0.2em] text-white/40 uppercase mb-4 block"
+          >
+            Selected Works
+          </motion.span>
+          <motion.h2
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ delay: 0.1 }}
+            className="text-5xl md:text-7xl font-serif text-white"
+          >
+            Curated{" "}
+            <span className="italic text-transparent bg-clip-text bg-gradient-to-r from-pink-500 to-purple-500">
+              Excellence
+            </span>
+          </motion.h2>
+        </div>
+
+        <div className="flex flex-col gap-32 md:gap-48">
+          {projects.map((project, index) => (
+            <div
+              key={project.id}
+              className="flex flex-col-reverse md:flex-col lg:grid lg:grid-cols-12 gap-8 lg:gap-16 items-start"
+            >
+              {/* Left Column: Visual (Spans 7-8) */}
+              <div className="w-full lg:col-span-7 xl:col-span-8">
+                <ProjectCard project={project} index={index} />
+              </div>
+
+              {/* Right Column: Text (Spans 4-5) */}
+              <div className="w-full lg:col-span-5 xl:col-span-4 lg:sticky lg:top-[120px]">
+                <ProjectDetails project={project} />
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
   );
 }
