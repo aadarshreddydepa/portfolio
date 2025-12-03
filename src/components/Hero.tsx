@@ -74,10 +74,10 @@ export default function Hero() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5, delay: 0.3 }}
-          className="text-5xl md:text-7xl lg:text-8xl font-serif font-medium tracking-tight mb-8 leading-[1.1]"
+          className="text-4xl md:text-6xl lg:text-7xl font-serif font-medium tracking-tight mb-8 leading-[1.1]"
         >
           I'm passionate about turing ideas <br />
-          into seamless {" "}
+          into seamless{"  "}
           <span className="italic font-light text-white/80">
             real-world applications
           </span>

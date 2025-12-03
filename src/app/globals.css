@@ -126,6 +126,19 @@ body {
   animation: blob-slow 10s infinite ease-in-out;
 }
 
+@keyframes blob-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.animate-blob-spin {
+  animation: blob-spin 20s linear infinite;
+}
+
 @keyframes gradient-text {
   0% {
     background-position: 0% 50%;

@@ -9,7 +9,7 @@ const row1 = [
   { name: "JavaScript", icon: "https://cdn.simpleicons.org/javascript" },
   { name: "TypeScript", icon: "https://cdn.simpleicons.org/typescript" },
   { name: "HTML", icon: "https://cdn.simpleicons.org/html5" },
-  { name: "CSS", icon: "https://cdn.simpleicons.org/css3" },
+  { name: "CSS", icon: "/Logo/css3.svg" },
 ];
 
 const row2 = [
@@ -24,7 +24,7 @@ const row2 = [
 const row3 = [
   { name: "PostgreSQL", icon: "https://cdn.simpleicons.org/postgresql" },
   { name: "MongoDB", icon: "https://cdn.simpleicons.org/mongodb" },
-  { name: "AWS", icon: "https://cdn.simpleicons.org/amazonwebservices" },
+  { name: "AWS", icon: "/Logo/amazon.svg" },
   { name: "Linux", icon: "https://cdn.simpleicons.org/linux/white" },
   { name: "PyTorch", icon: "https://cdn.simpleicons.org/pytorch" },
   { name: "OpenCV", icon: "https://cdn.simpleicons.org/opencv" },
@@ -74,7 +74,7 @@ export default function TechImpact() {
   return (
     <div className="h-full flex flex-col bg-[#0a0a0a] border border-white/10 rounded-3xl relative overflow-hidden">
       {/* Tech Stack Section */}
-      <div className="p-8 pb-0 relative z-20">
+      <div className="p-8 pb-0 relative z-20 w-full min-w-0">
         <div className="text-center mb-8">
           <h3 className="text-3xl font-serif text-white/90 mb-2">
             Passionate about cutting-edge
@@ -84,7 +84,7 @@ export default function TechImpact() {
           </h3>
         </div>
 
-        <div className="flex flex-col gap-4 mb-8">
+        <div className="flex flex-col gap-4 mb-8 w-full max-w-full">
           <MarqueeRow items={row1} direction="left" speed={30} />
           <MarqueeRow items={row2} direction="right" speed={25} />
           <MarqueeRow items={row3} direction="left" speed={35} />
