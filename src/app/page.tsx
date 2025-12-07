@@ -1,20 +1,24 @@
-import Footer from "@/components/Footer";
-import Hero from "@/components/Hero";
-import Navbar from "@/components/Navbar";
-import BentoGrid from "@/components/bento/BentoGrid";
-import CuratedWork from "@/components/CuratedWork";
-import SecretSauce from "@/components/SecretSauce";
+import Navbar from "@/components/shared/Navbar";
+import Hero from "@/components/home/Hero";
+import BentoGrid from "@/components/home/bento/BentoGrid";
+import CuratedWork from "@/components/work/CuratedWork";
+import SecretSauce from "@/components/home/SecretSauce";
+import ScrollingText from "@/components/home/ScrollingText";
+import AboutMe from "@/components/about/AboutMe";
+import IdeaToApp from "@/components/home/IdeaToApp";
+import Footer from "@/components/shared/Footer";
 
 export default function Home() {
   return (
-    <main className="min-h-screen bg-background text-foreground selection:bg-white/20">
+    <main className="bg-black min-h-screen">
       <Navbar />
-
       <Hero />
       <BentoGrid />
       <CuratedWork />
       <SecretSauce />
-
+      <ScrollingText />
+      <AboutMe />
+      <IdeaToApp />
       <Footer />
     </main>
   );
