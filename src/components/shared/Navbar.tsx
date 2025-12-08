@@ -148,7 +148,7 @@ export default function Navbar() {
                           <div className="absolute -top-6 left-0 w-full h-6 bg-transparent" />
                           {/* Guestbook Card */}
                           <Link
-                            href="#guestbook"
+                            href="/guestbook"
                             className="group relative col-span-1 h-[320px] rounded-2xl overflow-hidden bg-[#1A1A1A]"
                           >
                             <Image
@@ -169,7 +169,7 @@ export default function Navbar() {
 
                           {/* Bucket List Card */}
                           <Link
-                            href="#bucket-list"
+                            href="/bucket-list"
                             className="group relative col-span-1 h-[320px] rounded-2xl overflow-hidden bg-[#1A1A1A]"
                           >
                             <Image
@@ -191,7 +191,7 @@ export default function Navbar() {
                           {/* Right Column Links */}
                           <div className="col-span-1 flex flex-col gap-2 h-full">
                             <Link
-                              href="#links"
+                              href="/links"
                               className="flex-1 flex items-center gap-4 p-4 rounded-2xl bg-[#1A1A1A] hover:bg-[#222] border border-white/5 transition-colors group"
                             >
                               <div className="p-3 rounded-xl bg-white/5 text-white/70 group-hover:text-white border border-white/5">
@@ -208,7 +208,7 @@ export default function Navbar() {
                             </Link>
 
                             <Link
-                              href="#uses"
+                              href="/uses"
                               className="flex-1 flex items-center gap-4 p-4 rounded-2xl bg-[#1A1A1A] hover:bg-[#222] border border-white/5 transition-colors group"
                             >
                               <div className="p-3 rounded-xl bg-white/5 text-white/70 group-hover:text-white border border-white/5">

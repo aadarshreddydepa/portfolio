@@ -792,7 +792,6 @@ export default function BookACall() {
           </div>
         </div>
       </main>
-      <IdeaToApp />
       <Footer />
     </div>
   );

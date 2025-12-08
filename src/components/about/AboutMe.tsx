@@ -12,7 +12,7 @@ const images = [
     color: "from-blue-500 to-cyan-500",
   },
   {
-    src: "/Images/Himalaya.png", // Assuming this is for Travel
+    src: "/Images/travel.png", // Assuming this is for Travel
     caption: "I Travel",
     color: "from-emerald-500 to-green-500",
   },

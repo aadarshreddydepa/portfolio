@@ -17,7 +17,6 @@ export default function About() {
         <ExperienceTimeline />
       </div>
 
-      <IdeaToApp />
       <Footer />
     </main>
   );

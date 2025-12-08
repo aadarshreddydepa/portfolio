@@ -373,14 +373,22 @@ export default function CuratedWork() {
 
                   {/* Features List */}
                   <ul className="space-y-4 mb-10">
-                    {activeProject.features.map((feature, i) => (
-                      <li key={i} className="flex items-start gap-3">
-                        <SparkleIcon className="w-5 h-5 shrink-0 text-pink-500 mt-0.5" />
-                        <span className="text-white/80 text-[15px]">
-                          {feature}
-                        </span>
-                      </li>
-                    ))}
+                    {activeProject.features.map((feature, i) => {
+                      // Extract the primary color from the gradient (e.g. "from-pink-500" -> "text-pink-500")
+                      const iconColor = activeProject.color
+                        .split(" ")[0]
+                        .replace("from-", "text-");
+                      return (
+                        <li key={i} className="flex items-start gap-3">
+                          <SparkleIcon
+                            className={`w-5 h-5 shrink-0 ${iconColor} mt-0.5`}
+                          />
+                          <span className="text-white/80 text-[15px]">
+                            {feature}
+                          </span>
+                        </li>
+                      );
+                    })}
                   </ul>
 
                   {/* Tech Stack & Links */}

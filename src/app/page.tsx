@@ -18,7 +18,6 @@ export default function Home() {
       <SecretSauce />
       <ScrollingText />
       <AboutMe />
-      <IdeaToApp />
       <Footer />
     </main>
   );

@@ -15,7 +15,6 @@ export default function Work() {
         <CuratedWork />
       </div>
 
-      <IdeaToApp />
       <Footer />
     </main>
   );

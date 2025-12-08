@@ -12,6 +12,9 @@ import {
   X,
   ArrowRight,
   Command,
+  Linkedin,
+  Github,
+  Twitter,
 } from "lucide-react";
 import { useEffect, useState } from "react";
 import Link from "next/link";
@@ -32,31 +35,52 @@ const navItems = [
     icon: Briefcase,
     name: "Projects",
     description: "Showcase of my projects",
-    href: "#projects",
+    href: "/work",
   },
   {
     icon: FileText,
     name: "Blog",
     description: "Thoughts, mental models, and tutorials",
-    href: "#blog",
+    href: "/blog",
   },
   {
     icon: User,
     name: "About",
     description: "Learn more about me!",
-    href: "#about",
+    href: "/about",
   },
   {
     icon: LinkIcon,
     name: "Links",
     description: "All my links are here",
-    href: "#links",
+    href: "/links",
   },
   {
     icon: List,
     name: "Bucket List",
     description: "Things to do at least once in my life",
-    href: "#bucket-list",
+    href: "/bucket-list",
+  },
+];
+
+const socialItems = [
+  {
+    icon: Linkedin,
+    name: "LinkedIn",
+    description: "Connect professionally",
+    href: "https://www.linkedin.com/in/aadarsh-reddy-depa-19b88722b/",
+  },
+  {
+    icon: Github,
+    name: "GitHub",
+    description: "Check out my code",
+    href: "https://github.com/aadarshreddydepa",
+  },
+  {
+    icon: Twitter,
+    name: "Twitter",
+    description: "Follow my thoughts",
+    href: "https://x.com/aadarshdepa",
   },
 ];
 
@@ -77,13 +101,21 @@ export default function CommandPalette({
     };
     window.addEventListener("keydown", handleKeyDown);
     return () => window.removeEventListener("keydown", handleKeyDown);
-  }, [setIsOpen]);
+  }, [setIsOpen, isOpen]);
 
-  const filteredItems = navItems.filter(
+  const filteredNav = navItems.filter(
     (item) =>
       item.name.toLowerCase().includes(search.toLowerCase()) ||
       item.description.toLowerCase().includes(search.toLowerCase())
   );
+
+  const filteredSocials = socialItems.filter(
+    (item) =>
+      item.name.toLowerCase().includes(search.toLowerCase()) ||
+      item.description.toLowerCase().includes(search.toLowerCase())
+  );
+
+  const hasResults = filteredNav.length > 0 || filteredSocials.length > 0;
 
   return (
     <AnimatePresence>
@@ -124,42 +156,78 @@ export default function CommandPalette({
 
             {/* Navigation Group */}
             <div className="p-3 overflow-y-auto custom-scrollbar">
-              <div className="text-sm font-medium text-white/40 px-4 py-2 mb-1">
-                Navigation
-              </div>
+              {hasResults ? (
+                <>
+                  {filteredNav.length > 0 && (
+                    <>
+                      <div className="text-sm font-medium text-white/40 px-4 py-2 mb-1">
+                        Navigation
+                      </div>
+                      {filteredNav.map((item, index) => (
+                        <Link
+                          key={item.href}
+                          href={item.href}
+                          onClick={() => setIsOpen(false)}
+                          className="flex items-center gap-4 px-4 py-4 rounded-xl hover:bg-white/5 group transition-colors cursor-pointer"
+                        >
+                          <div className="p-3 rounded-lg bg-white/5 text-white/70 group-hover:text-white group-hover:bg-white/10 transition-colors border border-white/5">
+                            <item.icon size={24} />
+                          </div>
+                          <div className="flex-1">
+                            <div className="flex items-center gap-2">
+                              <span className="text-lg font-medium text-white group-hover:text-white transition-colors">
+                                {item.name}
+                              </span>
+                            </div>
+                            <div className="text-sm text-white/40 group-hover:text-white/60 transition-colors">
+                              {item.description}
+                            </div>
+                          </div>
+                          <ArrowRight
+                            size={20}
+                            className="text-white/20 group-hover:text-white/50 opacity-0 group-hover:opacity-100 transition-all -translate-x-2 group-hover:translate-x-0"
+                          />
+                        </Link>
+                      ))}
+                    </>
+                  )}
 
-              {filteredItems.length > 0 ? (
-                filteredItems.map((item, index) => (
-                  <Link
-                    key={index}
-                    href={item.href}
-                    onClick={() => setIsOpen(false)}
-                    className="flex items-center gap-4 px-4 py-4 rounded-xl hover:bg-white/5 group transition-colors cursor-pointer"
-                  >
-                    <div className="p-3 rounded-lg bg-white/5 text-white/70 group-hover:text-white group-hover:bg-white/10 transition-colors border border-white/5">
-                      <item.icon size={24} />
-                    </div>
-                    <div className="flex-1">
-                      <div className="flex items-center gap-2">
-                        <span className="text-lg font-medium text-white group-hover:text-white transition-colors">
-                          {item.name}
-                        </span>
-                        {index === 0 && (
-                          <span className="text-xs bg-white/10 text-white/50 px-2 py-0.5 rounded">
-                            Current
-                          </span>
-                        )}
+                  {filteredSocials.length > 0 && (
+                    <>
+                      <div className="text-sm font-medium text-white/40 px-4 py-2 mb-1 mt-2">
+                        Socials
                       </div>
-                      <div className="text-sm text-white/40 group-hover:text-white/60 transition-colors">
-                        {item.description}
-                      </div>
-                    </div>
-                    <ArrowRight
-                      size={20}
-                      className="text-white/20 group-hover:text-white/50 opacity-0 group-hover:opacity-100 transition-all -translate-x-2 group-hover:translate-x-0"
-                    />
-                  </Link>
-                ))
+                      {filteredSocials.map((item, index) => (
+                        <Link
+                          key={item.href}
+                          href={item.href}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          onClick={() => setIsOpen(false)}
+                          className="flex items-center gap-4 px-4 py-4 rounded-xl hover:bg-white/5 group transition-colors cursor-pointer"
+                        >
+                          <div className="p-3 rounded-lg bg-white/5 text-white/70 group-hover:text-white group-hover:bg-white/10 transition-colors border border-white/5">
+                            <item.icon size={24} />
+                          </div>
+                          <div className="flex-1">
+                            <div className="flex items-center gap-2">
+                              <span className="text-lg font-medium text-white group-hover:text-white transition-colors">
+                                {item.name}
+                              </span>
+                            </div>
+                            <div className="text-sm text-white/40 group-hover:text-white/60 transition-colors">
+                              {item.description}
+                            </div>
+                          </div>
+                          <ArrowRight
+                            size={20}
+                            className="text-white/20 group-hover:text-white/50 opacity-0 group-hover:opacity-100 transition-all -translate-x-2 group-hover:translate-x-0"
+                          />
+                        </Link>
+                      ))}
+                    </>
+                  )}
+                </>
               ) : (
                 <div className="px-4 py-8 text-center text-white/40 text-base">
                   No results found.
@@ -169,16 +237,18 @@ export default function CommandPalette({
 
             {/* Footer */}
             <div className="px-4 py-3 bg-white/5 border-t border-white/10 flex items-center justify-between text-xs text-white/40">
-              <div className="flex gap-3">
-                <span className="hover:text-white cursor-pointer transition-colors">
-                  LinkedIn
-                </span>
-                <span className="hover:text-white cursor-pointer transition-colors">
-                  GitHub
-                </span>
-                <span className="hover:text-white cursor-pointer transition-colors">
-                  Twitter
-                </span>
+              <div className="flex gap-4">
+                {socialItems.map((social) => (
+                  <Link
+                    key={social.name}
+                    href={social.href}
+                    target="_blank"
+                    className="flex items-center gap-1.5 hover:text-white transition-colors"
+                  >
+                    <social.icon size={14} />
+                    {social.name}
+                  </Link>
+                ))}
               </div>
               <div className="flex gap-4">
                 <span className="flex items-center gap-1">
