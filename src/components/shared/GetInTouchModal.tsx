@@ -88,7 +88,11 @@ export default function GetInTouchModal({
             </div>
 
             {/* Message Button */}
-            <button className="w-full flex items-center justify-between p-4 bg-[#1a1a1a] hover:bg-[#222] border border-white/5 hover:border-white/10 rounded-2xl transition-all group mb-8">
+            <Link
+              href="/book-call?tab=message"
+              className="w-full flex items-center justify-between p-4 bg-[#1a1a1a] hover:bg-[#222] border border-white/5 hover:border-white/10 rounded-2xl transition-all group mb-8"
+              onClick={onClose}
+            >
               <div className="flex items-center gap-3">
                 <div className="w-10 h-10 rounded-full bg-[#2a2a2a] flex items-center justify-center">
                   <MessageSquare className="w-4 h-4 text-white" />
@@ -100,7 +104,7 @@ export default function GetInTouchModal({
               <span className="text-xs text-white/40 group-hover:text-white transition-colors">
                 Tap to open
               </span>
-            </button>
+            </Link>
 
             {/* Socials */}
             <div className="border-t border-white/5 pt-6">
@@ -109,19 +113,25 @@ export default function GetInTouchModal({
               </p>
               <div className="flex justify-center gap-6">
                 <Link
-                  href="#"
+                  href="https://www.linkedin.com/in/aadarsh-reddy-depa-19b88722b/"
+                  target="_blank"
+                  rel="noopener noreferrer"
                   className="text-white/40 hover:text-white transition-colors"
                 >
                   <Linkedin size={20} />
                 </Link>
                 <Link
-                  href="#"
+                  href="https://github.com/aadarshreddydepa"
+                  target="_blank"
+                  rel="noopener noreferrer"
                   className="text-white/40 hover:text-white transition-colors"
                 >
                   <Github size={20} />
                 </Link>
                 <Link
-                  href="#"
+                  href="https://x.com/aadarshdepa"
+                  target="_blank"
+                  rel="noopener noreferrer"
                   className="text-white/40 hover:text-white transition-colors"
                 >
                   <Twitter size={20} />

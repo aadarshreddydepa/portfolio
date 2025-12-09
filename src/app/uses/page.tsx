@@ -172,21 +172,31 @@ export default function UsesPage() {
             {/* Content */}
             <div className="lg:col-span-8 border-l border-dashed border-white/10 pl-12">
               <div className="rounded-3xl overflow-hidden border border-white/10 bg-[#0a0a0a]">
-                <div className="relative aspect-video w-full">
+                <div className="relative aspect-video w-full group">
+                  {/* Starlight Gradient Background */}
+                  <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_0%,rgba(227,225,216,0.15),transparent_70%)] z-0" />
+                  <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_100%,rgba(227,225,216,0.1),transparent_50%)] z-0" />
                   <Image
                     src="/Images/Uses/mac.webp"
                     alt="MacBook Air M2"
                     fill
-                    className="object-cover"
+                    className="object-contain p-8 relative z-10 drop-shadow-2xl transition-transform duration-500 group-hover:scale-105"
                   />
                 </div>
-                <div className="p-8 border-t border-white/10 bg-[#0F0F0F]">
-                  <h3 className="text-2xl font-bold text-white mb-2">
-                    MacBook Air M2
-                  </h3>
-                  <p className="text-white/60 font-mono text-sm">
-                    16GB Unified Memory • 256GB SSD • Starlight
-                  </p>
+                <div className="p-6 border-t border-white/10 bg-[#0F0F0F]">
+                  <div className="flex items-center justify-between">
+                    <div>
+                      <h3 className="text-xl font-bold text-white mb-1">
+                        MacBook Air M2
+                      </h3>
+                      <p className="text-white/40 font-mono text-xs">
+                        16GB Unified Memory • 256GB SSD
+                      </p>
+                    </div>
+                    <span className="px-3 py-1.5 rounded-full text-[10px] font-bold tracking-wider uppercase bg-[#E3E1D8]/10 text-[#E3E1D8] border border-[#E3E1D8]/20 shadow-[0_0_15px_rgba(227,225,216,0.1)]">
+                      Starlight
+                    </span>
+                  </div>
                 </div>
               </div>
             </div>

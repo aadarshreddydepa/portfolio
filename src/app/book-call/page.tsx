@@ -21,7 +21,8 @@ import Link from "next/link";
 import Footer from "@/components/shared/Footer";
 import IdeaToApp from "@/components/home/IdeaToApp";
 import Image from "next/image";
-import { useState } from "react";
+import { useState, Suspense } from "react";
+import { useSearchParams } from "next/navigation";
 import {
   format,
   addMonths,
@@ -75,10 +76,11 @@ const GoogleMeetLogo = () => (
   </svg>
 );
 
-export default function BookACall() {
-  const [activeTab, setActiveTab] = useState<"calendar" | "message">(
-    "calendar"
-  );
+function BookACallContent() {
+  const searchParams = useSearchParams();
+  const [activeTab, setActiveTab] = useState<"calendar" | "message">(() => {
+    return searchParams.get("tab") === "message" ? "message" : "calendar";
+  });
   const [currentDate, setCurrentDate] = useState(new Date());
   const [selectedDate, setSelectedDate] = useState<Date | null>(new Date());
   const [selectedTime, setSelectedTime] = useState<string | null>(null);
@@ -291,13 +293,28 @@ export default function BookACall() {
             </div>
 
             <div className="flex justify-center gap-6 text-white/40">
-              <Link href="#" className="hover:text-white transition-colors">
+              <Link
+                href="https://www.linkedin.com/in/aadarsh-reddy-depa-19b88722b/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="hover:text-white transition-colors"
+              >
                 <Linkedin size={20} />
               </Link>
-              <Link href="#" className="hover:text-white transition-colors">
+              <Link
+                href="https://github.com/aadarshreddydepa"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="hover:text-white transition-colors"
+              >
                 <Github size={20} />
               </Link>
-              <Link href="#" className="hover:text-white transition-colors">
+              <Link
+                href="https://x.com/aadarshdepa"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="hover:text-white transition-colors"
+              >
                 <Twitter size={20} />
               </Link>
             </div>
@@ -506,7 +523,7 @@ export default function BookACall() {
                                                       }
                                                       ${
                                                         isPastDate
-                                                          ? "text-white/20 cursor-not-allowed decoration-white/20"
+                                                          ? "text-white/10 cursor-not-allowed decoration-white/10 opacity-50"
                                                           : "hover:bg-white/10"
                                                       }
                                                       ${
@@ -570,15 +587,33 @@ export default function BookACall() {
                           </div>
 
                           <div className="space-y-3">
-                            {timeSlots.map((time) => (
-                              <button
-                                key={time}
-                                onClick={() => handleTimeSelect(time)}
-                                className="w-full py-3 px-4 rounded-xl border border-white/10 hover:border-white/40 text-sm text-white/60 hover:text-white font-medium transition-all hover:bg-white/5 active:scale-[0.98]"
-                              >
-                                {formatTime(time)}
-                              </button>
-                            ))}
+                            {timeSlots.map((time) => {
+                              // Check if time is in the past (only if selected date is today)
+                              const isPastTime = (() => {
+                                if (!selectedDate || !isToday(selectedDate))
+                                  return false;
+                                const [h, m] = time.split(":").map(Number);
+                                const now = new Date();
+                                const slotDate = new Date();
+                                slotDate.setHours(h, m, 0, 0);
+                                return isBefore(slotDate, now);
+                              })();
+
+                              return (
+                                <button
+                                  key={time}
+                                  onClick={() => handleTimeSelect(time)}
+                                  disabled={isPastTime}
+                                  className={`w-full py-3 px-4 rounded-xl border font-medium transition-all ${
+                                    isPastTime
+                                      ? "border-white/5 text-white/10 cursor-not-allowed opacity-50"
+                                      : "border-white/10 hover:border-white/40 text-white/60 hover:text-white hover:bg-white/5 active:scale-[0.98]"
+                                  }`}
+                                >
+                                  {formatTime(time)}
+                                </button>
+                              );
+                            })}
                           </div>
                         </div>
                       </motion.div>
@@ -803,4 +838,12 @@ function addMinutesRaw(time: string, minutes: number) {
   const date = new Date();
   date.setHours(h, m + minutes);
   return format(date, "HH:mm");
+}
+
+export default function BookACall() {
+  return (
+    <Suspense>
+      <BookACallContent />
+    </Suspense>
+  );
 }
