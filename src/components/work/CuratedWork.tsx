@@ -55,7 +55,7 @@ const projects: Project[] = [
     ],
     image: "/Images/VideoSummarizer/dashboard.png", // Placeholder - User can update
     link: "https://github.com/aadarshreddydepa",
-    github: "https://github.com/aadarshreddydepa",
+    github: "https://github.com/aadarshreddydepa/Dynamic-Video-Summarization",
     color: "from-pink-500 to-rose-500",
   },
   {
@@ -81,8 +81,8 @@ const projects: Project[] = [
       "/Images/Syndicator/Dashboard_dark.png",
       "/Images/Syndicator/Login_dark.png",
     ],
-    link: "#",
-    github: "#",
+    link: "https://syndicator.houseofdarmoji.com/",
+    github: "https://github.com/aadarshreddydepa/SyndicatorFE",
     color: "from-blue-500 to-cyan-500",
   },
   {
@@ -106,7 +106,7 @@ const projects: Project[] = [
     ],
     image: "/Images/ColdMail/home.png",
     link: "#",
-    github: "#",
+    github: "https://github.com/aadarshreddydepa/Cold-Mail-Generator",
     color: "from-purple-500 to-indigo-500",
   },
   {
@@ -134,7 +134,7 @@ const projects: Project[] = [
       "/Images/Saloon/list.png",
     ],
     link: "#",
-    github: "#",
+    github: "https://github.com/aadarshreddydepa/Saloon-App",
     color: "from-orange-500 to-red-500",
   },
 ];
