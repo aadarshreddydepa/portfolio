@@ -1,6 +1,7 @@
 import Navbar from "@/components/shared/Navbar";
 import Hero from "@/components/home/Hero";
 import BentoGrid from "@/components/home/bento/BentoGrid";
+import WorkExperience from "@/components/work/WorkExperience";
 import CuratedWork from "@/components/work/CuratedWork";
 import SecretSauce from "@/components/home/SecretSauce";
 import ScrollingText from "@/components/home/ScrollingText";
@@ -14,6 +15,7 @@ export default function Home() {
       <Navbar />
       <Hero />
       <BentoGrid />
+      <WorkExperience />
       <CuratedWork />
       <SecretSauce />
       <ScrollingText />

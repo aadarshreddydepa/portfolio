@@ -62,6 +62,7 @@ const doto = Doto({
   variable: "--font-doto",
   subsets: ["latin"],
   display: "swap",
+  // adjustFontFallback: false,
 });
 
 const caveat = Caveat({

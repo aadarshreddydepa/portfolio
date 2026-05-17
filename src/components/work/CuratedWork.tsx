@@ -82,7 +82,7 @@ const projects: Project[] = [
       "/Images/Syndicator/Login_dark.png",
     ],
     link: "https://syndicator.houseofdarmoji.com/",
-    github: "https://github.com/aadarshreddydepa/SyndicatorFE",
+    github: "https://github.com/aadarshreddydepa/Syndicator_FE",
     color: "from-blue-500 to-cyan-500",
   },
   {
@@ -209,13 +209,76 @@ const Badge = ({ label }: TechBadge) => {
   );
 };
 
+// ... (imports)
+
+// --- Mobile Project Details Component ---
+const MobileProjectDetails = ({ project }: { project: Project }) => {
+  return (
+    <div className="lg:hidden px-6 pb-24 text-left">
+      <div className="flex items-center gap-4 mb-6">
+        <div className={`h-[2px] w-12 bg-gradient-to-r ${project.color}`} />
+        <h3 className="text-3xl font-serif font-bold text-white">
+          {project.title}
+        </h3>
+      </div>
+
+      <p className="text-[17px] text-white/60 leading-relaxed mb-8 font-light">
+        {project.description}
+      </p>
+
+      <ul className="space-y-4 mb-10">
+        {project.features.map((feature, i) => {
+          const iconColor = project.color
+            .split(" ")[0]
+            .replace("from-", "text-");
+          return (
+            <li key={i} className="flex items-start gap-3">
+              <SparkleIcon className={`w-5 h-5 shrink-0 ${iconColor} mt-0.5`} />
+              <span className="text-white/80 text-[15px]">{feature}</span>
+            </li>
+          );
+        })}
+      </ul>
+
+      <div className="flex flex-wrap gap-2 mb-10">
+        {project.techStack.map((tech, i) => (
+          <Badge key={i} {...tech} />
+        ))}
+      </div>
+
+      <div className="flex gap-6">
+        {project.github && (
+          <Link
+            href={project.github}
+            className="flex items-center gap-2 text-white/50 hover:text-white transition-colors"
+          >
+            <Github size={20} />
+            <span className="text-sm uppercase tracking-widest font-bold">
+              Code
+            </span>
+          </Link>
+        )}
+        {project.link && (
+          <Link
+            href={project.link}
+            className="flex items-center gap-2 text-white/50 hover:text-white transition-colors"
+          >
+            <Globe size={20} />
+            <span className="text-sm uppercase tracking-widest font-bold">
+              Live Demo
+            </span>
+          </Link>
+        )}
+      </div>
+    </div>
+  );
+};
+
 const ProjectCard = ({
   project,
-  index,
   setActiveProject,
 }: {
   project: Project;
-  index: number;
   setActiveProject: (id: string) => void;
 }) => {
   const ref = useRef(null);
@@ -240,7 +303,7 @@ const ProjectCard = ({
   return (
     <div
       ref={ref}
-      className="min-h-screen flex items-center justify-center p-6 md:p-12"
+      className="min-h-[50vh] md:min-h-screen flex items-center justify-center p-6 md:p-12"
     >
       <Link
         href={project.link}
@@ -302,10 +365,10 @@ export default function CuratedWork() {
     projects.find((p) => p.id === activeProjectId) || projects[0];
 
   return (
-    <section className="bg-black py-24 relative">
+    <section className="bg-black relative">
       <div className="max-w-[1400px] mx-auto px-6">
         {/* Header */}
-        <div className="relative text-center mb-32 py-12 flex flex-col items-center justify-center overflow-hidden">
+        <div className="relative text-center mb-10 px-10 py-12 flex flex-col items-center justify-center overflow-hidden">
           {/* Background Text Image */}
           <div className="absolute inset-0 z-0 flex items-center justify-center opacity-40 select-none pointer-events-none">
             <div className="relative w-full max-w-4xl h-40 md:h-64">
@@ -336,13 +399,14 @@ export default function CuratedWork() {
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 relative">
           {/* Left Column: Scrollable Images */}
           <div className="flex flex-col gap-0">
-            {projects.map((project, index) => (
-              <ProjectCard
-                key={project.id}
-                project={project}
-                index={index}
-                setActiveProject={setActiveProjectId}
-              />
+            {projects.map((project) => (
+              <div key={project.id} className="flex flex-col">
+                <ProjectCard
+                  project={project}
+                  setActiveProject={setActiveProjectId}
+                />
+                <MobileProjectDetails project={project} />
+              </div>
             ))}
           </div>
 

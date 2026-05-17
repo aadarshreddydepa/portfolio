@@ -12,8 +12,8 @@ export default function InsideScoop() {
         <span className="text-sm font-bold tracking-widest text-white/40 uppercase mb-3 block">
           The Inside Scoop
         </span>
-        <h3 className="text-3xl font-medium text-white/90">
-          Currently building a Saas Application
+        <h3 className="text-3xl font-medium font-sans text-white/70">
+          Currently building a Saas Application named ETA Eats to solve a real world problem
         </h3>
       </div>
 
