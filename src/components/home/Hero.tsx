@@ -120,7 +120,7 @@ export default function Hero() {
           className="flex flex-col sm:flex-row flex-wrap justify-center items-center gap-4 sm:gap-6 w-full px-4 sm:w-auto"
         >
           <Link
-            href="#contact"
+            href="/book-call"
             className="group inline-flex justify-center items-center gap-2 px-8 py-4 bg-white/10 hover:bg-white/20 border border-white/10 rounded-full font-medium text-white transition-all backdrop-blur-sm w-full sm:w-auto"
           >
             Let's Connect

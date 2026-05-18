@@ -3,6 +3,7 @@
 import { Handshake, ArrowRight } from "lucide-react";
 import Image from "next/image";
 import { motion } from "framer-motion";
+import { useRouter } from "next/navigation";
 
 const satellites = [
   { id: 1, x: -80, y: -60, img: "https://i.pravatar.cc/100?img=19" },
@@ -12,16 +13,19 @@ const satellites = [
 ];
 
 export default function Collaboration() {
+  const router = useRouter();
+
   return (
     <motion.div
       initial="initial"
       whileHover="hover"
+      onClick={() => router.push("/book-call")}
       className="h-full flex flex-col justify-between p-8 bg-[#0a0a0a] border border-white/10 rounded-3xl relative overflow-hidden cursor-pointer"
     >
       {/* Network Animation Container */}
-      <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
-        {/* Central Avatar Container */}
-        <div className="relative w-[400px] h-[300px] flex items-center justify-center -translate-y-12 transform scale-75 sm:scale-100">
+      <div className="absolute inset-0 flex items-center justify-center pointer-events-none overflow-hidden rounded-3xl">
+        {/* The true center point */}
+        <div className="relative w-0 h-0 -translate-y-8 sm:-translate-y-12 transform scale-75 sm:scale-100">
           {/* Satellites */}
           {satellites.map((sat, i) => (
             <motion.div
@@ -37,6 +41,7 @@ export default function Collaboration() {
                 },
               }}
               className="absolute z-10"
+              style={{ top: 0, left: 0 }}
             >
               {/* Connection Line */}
               <motion.div
@@ -48,13 +53,13 @@ export default function Collaboration() {
                     transition: { duration: 0.4, delay: i * 0.05 },
                   },
                 }}
-                className="absolute top-1/2 left-1/2 h-[2px] bg-white origin-left -z-10"
+                className="absolute top-0 left-0 h-[2px] bg-white origin-left -z-10"
                 style={{
                   transform: `rotate(${Math.atan2(sat.y, sat.x)}rad)`,
                 }}
               />
 
-              <div className="w-12 h-12 rounded-full border-2 border-white/10 overflow-hidden relative shadow-lg bg-[#111]">
+              <div className="w-12 h-12 rounded-full border-2 border-white/10 overflow-hidden absolute shadow-lg bg-[#111] -translate-x-1/2 -translate-y-1/2" style={{ top: 0, left: 0 }}>
                 <Image
                   src={sat.img}
                   alt="Client"
@@ -72,7 +77,8 @@ export default function Collaboration() {
               hover: { scale: 1.05 },
             }}
             transition={{ duration: 0.3 }}
-            className="relative z-20 w-24 h-24 rounded-full overflow-hidden border-4 border-[#0a0a0a] shadow-2xl"
+            className="absolute z-20 w-24 h-24 rounded-full overflow-hidden border-4 border-[#0a0a0a] shadow-2xl -translate-x-1/2 -translate-y-1/2"
+            style={{ top: 0, left: 0 }}
           >
             <Image
               src="/Images/ME.png"
@@ -87,10 +93,8 @@ export default function Collaboration() {
           </motion.div>
 
           {/* Pulsing Rings */}
-          <div className="absolute inset-0 z-0 flex items-center justify-center">
-            <div className="w-[300px] h-[300px] border border-white/5 rounded-full absolute" />
-            <div className="w-[450px] h-[450px] border border-white/5 rounded-full absolute" />
-          </div>
+          <div className="absolute w-[300px] h-[300px] border border-white/5 rounded-full z-0 -translate-x-1/2 -translate-y-1/2" style={{ top: 0, left: 0 }} />
+          <div className="absolute w-[450px] h-[450px] border border-white/5 rounded-full z-0 -translate-x-1/2 -translate-y-1/2" style={{ top: 0, left: 0 }} />
         </div>
       </div>
 
