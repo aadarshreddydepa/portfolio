@@ -58,7 +58,7 @@ export default function WorkExperience() {
               className="relative group"
             >
               {/* Card Container */}
-              <div className="relative bg-transparent p-8 md:p-12 overflow-hidden">
+              <div className="relative bg-transparent p-4 sm:p-8 md:p-12 overflow-hidden">
 
                 <div className="flex flex-col md:flex-row gap-8 md:gap-12 relative z-10">
                   {/* Left Column - Logo & Meta */}

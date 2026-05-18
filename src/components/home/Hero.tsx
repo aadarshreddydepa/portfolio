@@ -117,11 +117,11 @@ export default function Hero() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5, delay: 0.5 }}
-          className="flex flex-wrap justify-center gap-6"
+          className="flex flex-col sm:flex-row flex-wrap justify-center items-center gap-4 sm:gap-6 w-full px-4 sm:w-auto"
         >
           <Link
             href="#contact"
-            className="group inline-flex items-center gap-2 px-8 py-4 bg-white/10 hover:bg-white/20 border border-white/10 rounded-full font-medium text-white transition-all backdrop-blur-sm"
+            className="group inline-flex justify-center items-center gap-2 px-8 py-4 bg-white/10 hover:bg-white/20 border border-white/10 rounded-full font-medium text-white transition-all backdrop-blur-sm w-full sm:w-auto"
           >
             Let's Connect
             <div className="bg-white text-black rounded-full p-1 group-hover:translate-x-1 transition-transform">
@@ -131,7 +131,7 @@ export default function Hero() {
 
           <button
             onClick={copyEmail}
-            className="inline-flex items-center gap-3 px-6 py-4 text-white/60 hover:text-white transition-colors"
+            className="inline-flex justify-center items-center gap-3 px-6 py-4 text-white/60 hover:text-white transition-colors w-full sm:w-auto"
           >
             {copied ? (
               <Check size={20} className="text-green-500" />

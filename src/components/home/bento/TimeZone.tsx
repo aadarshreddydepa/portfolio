@@ -93,7 +93,7 @@ export default function TimeZone() {
             animate={{ opacity: 1, scale: 1, rotateY: 0 }}
             exit={{ opacity: 0, scale: 0.8, rotateY: 90 }}
             transition={{ duration: 0.6, ease: "backOut" }}
-            className="relative w-[600px] h-[600px] md:w-[700px] md:h-[700px]"
+            className="relative w-[300px] h-[300px] sm:w-[600px] sm:h-[600px] md:w-[700px] md:h-[700px]"
           >
             <Image
               src={activeLocation.image}

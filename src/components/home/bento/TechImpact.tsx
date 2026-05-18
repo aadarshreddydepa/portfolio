@@ -119,10 +119,10 @@ export default function TechImpact() {
             />
 
             <div className="relative z-10 text-center -mt-10">
-              <h4 className="text-2xl font-medium text-white mb-2">
+              <h4 className="text-xl sm:text-2xl font-medium text-white mb-2">
                 Websites that
               </h4>
-              <h4 className="text-5xl font-bold text-blue-500 mb-8">Impact.</h4>
+              <h4 className="text-3xl sm:text-5xl font-bold text-blue-500 mb-8">Impact.</h4>
 
               <div className="inline-flex items-center gap-2 px-6 py-2.5 rounded-full bg-white text-black text-sm font-bold hover:scale-105 transition-transform cursor-pointer">
                 Start Project <ArrowRight size={14} />

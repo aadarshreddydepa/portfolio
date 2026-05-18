@@ -54,7 +54,7 @@ export default function IdeaToApp() {
             viewport={{ once: true }}
             transition={{ duration: 0.8, delay: 0.2 }}
           >
-            <h2 className="text-4xl md:text-6xl lg:text-7xl font-cinzel-decorative font-light text-white tracking-wide mb-2">
+            <h2 className="text-3xl sm:text-4xl md:text-6xl lg:text-7xl font-cinzel-decorative font-light text-white tracking-wide mb-2 text-center">
               FROM IDEA TO <span className="font-bold text-white">APP</span>
             </h2>
           </motion.div>
@@ -64,9 +64,9 @@ export default function IdeaToApp() {
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.8, delay: 0.2 }}
-            className="flex items-center gap-4"
+            className="flex items-center justify-center flex-wrap gap-2 sm:gap-4"
           >
-            <h2 className="text-4xl md:text-6xl lg:text-7xl font-orbitron font-light text-white tracking-wide flex items-center gap-4">
+            <h2 className="text-3xl sm:text-4xl md:text-6xl lg:text-7xl font-orbitron font-light text-white tracking-wide flex items-center justify-center flex-wrap gap-2 sm:gap-4 text-center">
               LET'S MAKE IT{" "}
               <span className="font-bold text-white">HAPPEN!</span>
             </h2>

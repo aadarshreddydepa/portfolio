@@ -246,7 +246,7 @@ const MobileProjectDetails = ({ project }: { project: Project }) => {
         ))}
       </div>
 
-      <div className="flex gap-6">
+      <div className="flex flex-wrap gap-4 sm:gap-6">
         {project.github && (
           <Link
             href={project.github}

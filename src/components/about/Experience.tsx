@@ -7,17 +7,17 @@ import { MapPin, Briefcase } from "lucide-react";
 
 const experiences = [
   {
-    startDate: "JAN 2025 - PRESENT",
+    startDate: "JAN 2026 - APR 2026",
     company: "Mphasis",
-    role: "Software Engineering Intern",
-    location: "Bangalore, India",
+    role: "Associate Software Engineer Trainee",
+    location: "Chennai, India",
     type: "On-site",
     description: [
       "Joining the engineering team to contribute to scalable enterprise applications, focusing on backend optimization and seamless API integrations.",
       "Working closely with senior engineers and product managers in an Agile environment to translate complex requirements into robust, maintainable code.",
       "Gaining hands-on experience with cloud infrastructure and microservices architecture, ensuring high availability and performance for mission-critical systems.",
     ],
-    tech: ["Java", "Spring Boot", "React", "AWS", "Microservices", "Docker"],
+    tech: [".NET", "Angular", "React", "AWS", "Microservices", "Docker"],
   },
   {
     startDate: "2024 - PRESENT",

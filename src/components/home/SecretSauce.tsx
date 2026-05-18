@@ -335,7 +335,7 @@ export default function SecretSauce() {
         {/* Blob - Centered behind text */}
         <motion.div
           style={{ rotate }}
-          className="relative w-[300px] h-[300px] md:w-[400px] md:h-[400px] mix-blend-screen opacity-80 will-change-transform"
+          className="relative w-[280px] h-[280px] sm:w-[300px] sm:h-[300px] md:w-[400px] md:h-[400px] mix-blend-screen opacity-80 will-change-transform"
         >
           <Image
             src="/Images/blob.png"
@@ -352,7 +352,7 @@ export default function SecretSauce() {
             <span className="text-xs font-bold tracking-[0.3em] text-white/60 uppercase mb-2 drop-shadow-md">
               My Skills
             </span>
-            <h2 className="text-5xl md:text-7xl font-instrument text-white text-center drop-shadow-2xl whitespace-normal md:whitespace-nowrap">
+            <h2 className="text-4xl sm:text-5xl md:text-7xl font-instrument text-white text-center drop-shadow-2xl whitespace-normal md:whitespace-nowrap">
               The Secret{" "}
               <span className="italic bg-clip-text text-transparent bg-gradient-to-r from-pink-500 via-purple-500 to-indigo-500 pr-2">
                 Sauce

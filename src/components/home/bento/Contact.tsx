@@ -15,19 +15,19 @@ export default function Contact() {
 
   return (
     <div className="h-full flex flex-col justify-center items-center p-8 bg-[#0a0a0a] border border-white/10 rounded-3xl relative overflow-hidden text-center">
-      <div className="relative z-10">
-        <h3 className="text-4xl md:text-5xl font-serif text-white mb-3">
+      <div className="relative z-10 w-full px-4 sm:px-0">
+        <h3 className="text-3xl sm:text-4xl md:text-5xl font-serif text-white mb-3">
           Let's work together
         </h3>
-        <h3 className="text-4xl md:text-5xl font-serif text-white mb-10">
+        <h3 className="text-3xl sm:text-4xl md:text-5xl font-serif text-white mb-10">
           on your next project
         </h3>
 
         <button
           onClick={handleCopy}
-          className="group flex items-center gap-4 px-8 py-4 bg-white/5 hover:bg-white/10 border border-white/10 rounded-2xl transition-all mx-auto"
+          className="group flex items-center justify-center gap-2 sm:gap-4 px-4 sm:px-8 py-3 sm:py-4 bg-white/5 hover:bg-white/10 border border-white/10 rounded-2xl transition-all mx-auto w-full sm:w-auto"
         >
-          <span className="text-xl text-white/60 group-hover:text-white transition-colors">
+          <span className="text-sm sm:text-xl text-white/60 group-hover:text-white transition-colors truncate">
             {email}
           </span>
           <div className="p-2 rounded-xl bg-white/5 text-white/40 group-hover:text-white transition-colors">

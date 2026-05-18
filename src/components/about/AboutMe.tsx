@@ -136,7 +136,7 @@ export default function AboutMe() {
             return (
               <motion.div
                 key={index}
-                className="absolute w-[280px] h-[380px] md:w-[350px] md:h-[450px] cursor-pointer"
+                className="absolute w-[220px] h-[300px] sm:w-[280px] sm:h-[380px] md:w-[350px] md:h-[450px] cursor-pointer"
                 initial={false}
                 animate={position}
                 variants={variants}

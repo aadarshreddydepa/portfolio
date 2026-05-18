@@ -21,7 +21,7 @@ export default function Collaboration() {
       {/* Network Animation Container */}
       <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
         {/* Central Avatar Container */}
-        <div className="relative w-[400px] h-[300px] flex items-center justify-center -translate-y-12">
+        <div className="relative w-[400px] h-[300px] flex items-center justify-center -translate-y-12 transform scale-75 sm:scale-100">
           {/* Satellites */}
           {satellites.map((sat, i) => (
             <motion.div

@@ -281,13 +281,14 @@ export default function Navbar() {
         </div>
 
         {/* Mobile Menu Overlay */}
-        {isOpen && (
-          <motion.div
-            initial={{ opacity: 0, y: -20 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -20 }}
-            className="absolute top-full left-0 right-0 bg-[#0a0a0a] border-b border-white/10 p-6 md:hidden flex flex-col gap-4 shadow-2xl pointer-events-auto"
-          >
+        <AnimatePresence>
+          {isOpen && (
+            <motion.div
+              initial={{ opacity: 0, y: -20 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -20 }}
+              className="absolute top-full left-0 right-0 bg-[#0a0a0a] border-b border-white/10 p-6 md:hidden flex flex-col gap-4 shadow-2xl pointer-events-auto h-[100dvh] overflow-y-auto pb-32"
+            >
             {navLinks.map((link) => (
               <Link
                 key={link.name}
@@ -307,6 +308,7 @@ export default function Navbar() {
             </Link>
           </motion.div>
         )}
+        </AnimatePresence>
       </motion.nav>
 
       {/* Command Palette Modal */}
